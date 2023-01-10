@@ -1,0 +1,25 @@
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: 500;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #FFDE00;
+    color: #3B4CCA;
+    border-radius: 4px;
+    float: right;
+    margin-right: 5%;
+  }
+  
+  a:hover {
+    color: #FFDE00;
+    background-color: #3B4CCA;
+  }

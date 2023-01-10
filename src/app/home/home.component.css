@@ -1,0 +1,25 @@
+.list {
+    margin: 10px 0 10px 0;
+}
+
+.box {
+    border: #000000 solid 1px; 
+    margin-bottom: 30px;
+}
+
+.image-box {
+    background-color: #f2f2f2;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text {
+    font-family: sans-serif;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px;
+}
