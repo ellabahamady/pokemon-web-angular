@@ -1,25 +1,30 @@
-.list {
-    margin: 10px 0 10px 0;
+.content {
+    margin: 1% 4%;
 }
 
-.box {
-    border: #000000 solid 1px; 
+.card {
+    border-radius: 10px;
+    border: 0px;
+    background-color: #ffffff;
     margin-bottom: 30px;
+    -webkit-box-shadow: 0px 1px 3px 1px rgba(69, 65, 78, 0.08);
+    -moz-box-shadow: 0px 1px 3px 1px rgba(69, 65, 78, 0.08);
+    box-shadow: 0px 1px 3px 1px rgba(69, 65, 78, 0.08);
 }
 
-.image-box {
-    background-color: #f2f2f2;
-}
-
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.text {
-    font-family: sans-serif;
+.card a{
+    text-decoration: none;
+    color: #000000;
     font-weight: 600;
+    margin: 20px;
+}
+
+.character{
     text-align: center;
-    margin: 10px;
+}
+
+.character img{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
 }

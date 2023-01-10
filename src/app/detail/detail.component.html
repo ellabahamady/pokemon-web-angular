@@ -1,1 +1,25 @@
-<p>detail works!</p>
+<div class="row content">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{{ character?.sprites.other.dream_world.front_default }}">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <p>{{ character?.name }}</p>
+
+        <p>Type : </p>
+        <div *ngFor="let item of character?.types">
+            <p>{{ item.type.name }}</p>
+        </div>
+
+        <p>Stats : </p>
+        <div *ngFor="let item of character?.stats">
+            <p>{{ item.stat.name }}</p>
+        </div>
+
+        <p>Ability : </p>
+        <div *ngFor="let item of character?.abilities">
+            <p>{{ item.ability.name }}</p>
+        </div>
+    </div>
+</div>

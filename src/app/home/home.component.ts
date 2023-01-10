@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Character } from '../models/character';
 import { PokemonService } from '../services/pokemon.service';
 
 @Component({
@@ -15,8 +14,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private pokemonService: PokemonService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getList();
+  }
 
+  getList(): void{
     this.pokemonService.getPokemonList(this.limit, this.off, 
       (data) => {
         data.forEach((item: any) => {
@@ -26,12 +28,10 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  getDetail(character: any) {
-    this.pokemonService.getPokemonDetail(character, 
+  getDetail(character: any): void{
+    this.pokemonService.getPokemonDetailByUrl(character.url, 
       (data) => {
-        data.image = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + data.id + '.png';
         this.characters.push(data)
-        console.log(this.characters)
       }  
     )
   }

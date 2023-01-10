@@ -20,9 +20,9 @@ export class PokemonService extends BaseService {
         )
     }
 
-  // Get Pokemon Detail
-  getPokemonDetail(pokemon: any, onSuccess: (data: any) => void): any {
-    this.get(pokemon.url)
+  // Get Pokemon Detail by Url
+  getPokemonDetailByUrl(url: any, onSuccess: (data: any) => void): any {
+    this.get(url)
         .subscribe(
           (resp: any) => {
             onSuccess(resp)
@@ -30,5 +30,14 @@ export class PokemonService extends BaseService {
         )
   }
 
+  // Get Pokemon Detail by Name
+  getPokemonDetailByName(name: string, onSuccess: (data: any) => void): any {
+    this.get(this.pokemonUrl +  `/${name}/`)
+        .subscribe(
+          (resp: any) => {
+            onSuccess(resp)
+          }
+        )
+  }
 }
 
