@@ -11,11 +11,12 @@ export class PokemonService extends BaseService {
   private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon';  // URL to web api
 
   // Get Pokemon List
-  getPokemonList(lim: any, off: any, onSuccess: (data: any) => void): any {
-    this.get(this.pokemonUrl +  `?limit=${lim}&offset=${off}`)
+  getPokemonList(limit: any, offset: any, onSuccess: (data: any) => void): any {
+    console.log(offset)
+    this.get(this.pokemonUrl +  `?limit=${limit}&offset=${offset}`)
         .subscribe(
           (resp: any) => {
-            onSuccess(resp.results)
+            onSuccess(resp)
           }
         )
     }

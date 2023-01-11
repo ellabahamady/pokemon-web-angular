@@ -1,0 +1,13 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a routerLink="/home" class="navbar-brand" >
+            <img src="assets/img/pokemon-logo.png">
+        </a>
+        <a routerLink="/list" class="btn position-relative" title="My Pokemon">
+            <img src="./assets/img/pokemon-icon.png" width="50px">
+            <span class="position-absolute translate-middle badge rounded-pill">
+              {{ totalPokemon }}
+            </span>
+        </a>
+    </div>
+</nav>

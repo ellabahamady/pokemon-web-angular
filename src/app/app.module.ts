@@ -9,21 +9,26 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DetailComponent } from './detail/detail.component';
 import { ListComponent } from './list/list.component';
+import { CookieService } from 'ngx-cookie-service';
+import { HeaderComponent } from './header/header.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DetailComponent,
-    ListComponent
+    ListComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

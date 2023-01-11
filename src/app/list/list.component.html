@@ -1,1 +1,19 @@
-<p>list works!</p>
+<app-header></app-header>
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>My Pokemon</h3>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6" *ngFor="let item of characters">
+            <div class="card">
+                <img src="{{ item.image }}">
+                <h5>{{ item.name }}</h5>
+                <button type="button" (click)="delete(item.id)" class="btn btn-sm btn-outline-danger">delete</button>
+            </div>
+        </div>
+        <div class="col-md-12 empty" *ngIf="characters?.length == 0">
+            <img src="./assets/img/pokemon-icon.png">
+            <h5>Empty</h5>
+        </div>
+    </div>
+</div>

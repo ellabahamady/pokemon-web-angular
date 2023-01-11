@@ -1,0 +1,12 @@
+.navbar {
+    margin-bottom: 20px !important;
+  }
+  
+  .navbar-brand img {
+      width: 300px;
+  }
+  
+  .container-fluid a {
+    text-decoration: none;
+    color: #DC3545;
+  }

@@ -8,8 +8,10 @@ import { PokemonService } from '../services/pokemon.service';
 })
 
 export class HomeComponent implements OnInit {
-  limit = 12;
-  off = 0;
+  page: number = 1;
+  limit: number = 12;
+  offset: number = 0;
+  totalCharacter: number = 0; 
   characters: any[] = [];
 
   constructor(private pokemonService: PokemonService) {}
@@ -19,9 +21,12 @@ export class HomeComponent implements OnInit {
   }
 
   getList(): void{
-    this.pokemonService.getPokemonList(this.limit, this.off, 
+    this.characters = [];
+    this.pokemonService.getPokemonList(this.limit, this.offset, 
       (data) => {
-        data.forEach((item: any) => {
+        console.log(data.results)
+        this.totalCharacter = data.count;
+        data.results.forEach((item: any) => {
           this.getDetail(item)
         });
       }  
@@ -34,6 +39,12 @@ export class HomeComponent implements OnInit {
         this.characters.push(data)
       }  
     )
+  }
+
+  renderPage(event: number) {
+    this.page = event;
+    this.offset = (event - 1) * 12;
+    this.getList();
   }
 }
 

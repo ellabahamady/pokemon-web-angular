@@ -1,25 +1,48 @@
-<div class="row content">
-    <div class="col-md-4">
-        <div class="card">
-            <img src="{{ character?.sprites.other.dream_world.front_default }}">
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <div class="card">
+              <img src="{{ character?.sprites.other.dream_world.front_default ? character?.sprites.other.dream_world.front_default : character?.sprites.other.home.front_default }}" alt="No Image">
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <p>{{ character?.name }}</p>
-
-        <p>Type : </p>
-        <div *ngFor="let item of character?.types">
-            <p>{{ item.type.name }}</p>
-        </div>
-
-        <p>Stats : </p>
-        <div *ngFor="let item of character?.stats">
-            <p>{{ item.stat.name }}</p>
-        </div>
-
-        <p>Ability : </p>
-        <div *ngFor="let item of character?.abilities">
-            <p>{{ item.ability.name }}</p>
+        <div class="col-md-8 col-sm-12">
+          <div class="row">
+            <div class="col-md-9 col-sm-9">
+              <h3>{{ character?.name }}</h3>
+            </div>
+            <div class="col-md-3 col-sm-3">
+              <div class="d-md-flex justify-content-md-end">
+                <button type="button" (click)="catch()" class="btn btn-outline-danger">
+                  <img src="./assets/img/pokemon-icon.png" width="20px"> Catch
+                </button>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <ul class="list-group">
+                <li class="list-group-item active">Type</li>
+                <div *ngFor="let item of character?.types">
+                  <li class="list-group-item">{{ item.type.name }}</li>
+                </div>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <ul class="list-group">
+                <li class="list-group-item active">Ability</li>
+                <div *ngFor="let item of character?.abilities">
+                  <li class="list-group-item">{{ item.ability.name }}</li>
+                </div>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <ul class="list-group">
+                <li class="list-group-item active">Stats</li>
+                <div *ngFor="let item of character?.stats">
+                  <li class="list-group-item">{{ item.stat.name }}</li>
+                </div>
+              </ul>
+            </div>
+          </div>
         </div>
     </div>
 </div>

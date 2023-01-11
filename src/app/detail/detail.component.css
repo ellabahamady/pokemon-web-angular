@@ -12,3 +12,11 @@
     box-shadow: 0px 1px 3px 1px rgba(69, 65, 78, 0.08);
     padding: 30px;
 }
+
+.list-group {
+    margin: 0 0 20px 0 !important;
+}
+
+button {
+    margin-bottom: 20px;
+}
