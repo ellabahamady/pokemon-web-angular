@@ -12,7 +12,6 @@ export class PokemonService extends BaseService {
 
   // Get Pokemon List
   getPokemonList(limit: any, offset: any, onSuccess: (data: any) => void): any {
-    console.log(offset)
     this.get(this.pokemonUrl +  `?limit=${limit}&offset=${offset}`)
         .subscribe(
           (resp: any) => {

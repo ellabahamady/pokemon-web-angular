@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   totalCharacter: number = 0; 
   characters: any[] = [];
 
+  isLoading: boolean = true;
+
   constructor(private pokemonService: PokemonService) {}
 
   ngOnInit() {
@@ -21,16 +23,18 @@ export class HomeComponent implements OnInit {
   }
 
   getList(): void{
+    this.isLoading = true;
     this.characters = [];
     this.pokemonService.getPokemonList(this.limit, this.offset, 
       (data) => {
-        console.log(data.results)
         this.totalCharacter = data.count;
         data.results.forEach((item: any) => {
           this.getDetail(item)
         });
       }  
     )
+
+    this.isLoading = false;
   }
 
   getDetail(character: any): void{

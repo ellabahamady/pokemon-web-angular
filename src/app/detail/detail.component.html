@@ -1,9 +1,18 @@
 <app-header></app-header>
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
 <div class="container-fluid">
     <div class="row">
+      <div class="col-md-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+          <li class="breadcrumb-item">{{ character?.name }}</li>
+        </ol>
+      </div>
         <div class="col-md-4 col-sm-6">
-            <div class="card">
-              <img src="{{ character?.sprites.other.dream_world.front_default ? character?.sprites.other.dream_world.front_default : character?.sprites.other.home.front_default }}" alt="No Image">
+            <div class="card-image">
+              <img src="{{ character?.sprites.other.dream_world.front_default ? character?.sprites.other.dream_world.front_default : character?.sprites.other.home.front_default }}" width="100%" alt="No Image">
             </div>
         </div>
         <div class="col-md-8 col-sm-12">
@@ -13,7 +22,7 @@
             </div>
             <div class="col-md-3 col-sm-3">
               <div class="d-md-flex justify-content-md-end">
-                <button type="button" (click)="catch()" class="btn btn-outline-danger">
+                <button type="button" (click)="save()" class="btn btn-outline-danger">
                   <img src="./assets/img/pokemon-icon.png" width="20px"> Catch
                 </button>
               </div>
@@ -44,5 +53,80 @@
             </div>
           </div>
         </div>
+    </div>
+    <div *ngIf="!isCompare">
+      <hr>
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h3>Compare {{ character?.name }} with another pokemon</h3>
+        </div>
+        <div class="col-md-2 col-sm-6" *ngFor="let item of characters | paginate : { itemsPerPage: limit, currentPage: page, totalItems: totalCharacter }">
+          <div class="card">
+            <img src="{{ item.sprites.other.dream_world.front_default ? item.sprites.other.dream_world.front_default : item.sprites.other.home.front_default }}" alt="No Image">
+            <h6>{{ item.name }}</h6>
+            <button type="button" *ngIf="item.id != character?.id" (click)="compare(item.name)" class="btn btn-sm btn-outline-secondary">compare</button>
+        </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <pagination-controls
+          (pageChange)="renderPage($event)"
+        ></pagination-controls>
+      </div>
+    </div>
+
+    <div *ngIf="isCompare">
+      <hr>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3>Compare 2 Pokemon</h3>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+          <div class="card">
+            <img src="{{ character?.sprites.other.dream_world.front_default ? character?.sprites.other.dream_world.front_default : character?.sprites.other.home.front_default }}" class="card-img-top" alt="No Image">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ character?.name }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h6>Type :</h6>
+                <span *ngFor = "let item of character?.types; let isLast=last">{{item.type.name}}{{isLast ? '' : ', '}}</span>
+              </li>
+              <li class="list-group-item">
+                <h6>Ability :</h6>
+                <span *ngFor="let item of character?.abilities; let isLast=last">{{ item.ability.name }}{{isLast ? '' : ', '}}</span>
+              </li>
+              <li class="list-group-item">
+                <h6>Stats :</h6>
+                <span *ngFor="let item of character?.stats; let isLast=last">{{ item.stat.name }}{{isLast ? '' : ', '}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+            <img src="{{ character_compare?.sprites.other.dream_world.front_default ? character_compare?.sprites.other.dream_world.front_default : character_compare?.sprites.other.home.front_default }}" class="card-img-top" alt="No Image">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ character_compare?.name }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h6>Type :</h6>
+                <span *ngFor = "let item of character_compare?.types; let isLast=last">{{item.type.name}}{{isLast ? '' : ', '}}</span>
+              </li>
+              <li class="list-group-item">
+                <h6>Ability :</h6>
+                <span *ngFor="let item of character_compare?.abilities; let isLast=last">{{ item.ability.name }}{{isLast ? '' : ', '}}</span>
+              </li>
+              <li class="list-group-item">
+                <h6>Stats :</h6>
+                <span *ngFor="let item of character_compare?.stats; let isLast=last">{{ item.stat.name }}{{isLast ? '' : ', '}}</span>
+              </li>
+            </ul>
+            <button type="button" (click)="remove()" class="btn btn-sm btn-outline-danger">remove</button>
+          </div>
+        </div>
+      </div>
     </div>
 </div>

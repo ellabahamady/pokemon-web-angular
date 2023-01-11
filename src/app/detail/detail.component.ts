@@ -13,6 +13,16 @@ import { HeaderComponent } from '../header/header.component';
 
 export class DetailComponent implements OnInit {
   character: any;
+  character_compare: any;
+
+  page: number = 1;
+  limit: number = 12;
+  offset: number = 0;
+  totalCharacter: number = 0; 
+  characters: any[] = [];
+
+  isLoading: boolean = false;
+  isCompare: boolean = false;
 
   @ViewChild(HeaderComponent) header!: HeaderComponent;
 
@@ -23,10 +33,12 @@ export class DetailComponent implements OnInit {
     private cookies: CookieService) {}
 
     ngOnInit() {
-      this.getDetail();
+      this.isLoading = true;
+      this.getDetailCharacter();
+      this.getList();
     }
 
-    getDetail(): void {
+    getDetailCharacter(): void {
       const data = this.route.snapshot.paramMap.get('name');
       if(data != null){
         this.pokemonService.getPokemonDetailByName(data, 
@@ -39,9 +51,10 @@ export class DetailComponent implements OnInit {
         this.location.back();
       }
       
+      this.isLoading = false;
     }
 
-    catch(): void {
+    save(): void {
       const data = {
         id: this.character.id,
         name: this.character.name,
@@ -67,8 +80,46 @@ export class DetailComponent implements OnInit {
       this.header.loadTotalPokemon();
     }
 
-    goBack(): void {
-      this.location.back();
+    getList(): void{
+      this.isLoading = true;
+      this.characters = [];
+      this.pokemonService.getPokemonList(this.limit, this.offset, 
+        (data) => {
+          this.totalCharacter = data.count;
+          data.results.forEach((item: any) => {
+            this.getDetail(item)
+          });
+        }  
+      )
+  
+      this.isLoading = false;
+    }
+  
+    getDetail(character: any): void{
+      this.pokemonService.getPokemonDetailByUrl(character.url, 
+        (data) => {
+          this.characters.push(data)
+        }  
+      )
+    }
+  
+    renderPage(event: number) {
+      this.page = event;
+      this.offset = (event - 1) * 12;
+      this.getList();
+    }
+
+    compare(name: string): void {
+      this.pokemonService.getPokemonDetailByName(name, 
+        (data) => {
+          this.character_compare = data;
+          this.isCompare = true;
+        }  
+      )
+    }
+
+    remove(): void {
+      this.isCompare = false;
     }
 }
 
