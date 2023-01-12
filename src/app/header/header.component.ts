@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
     this.loadTotalPokemon();
   }
 
+  /* Get Total My Pokemon */
   loadTotalPokemon(): void {
     const check = this.cookies.check('pokemon');
     if(check) {

@@ -19,17 +19,18 @@ export class ListComponent implements OnInit {
     this.getList();
   }
 
+  /* Get My Pokemon List */
   getList(): void{
     const check = this.cookies.check('pokemon');
     if(check) {
       const myPokemon = JSON.parse(this.cookies.get('pokemon'));
       this.characters = myPokemon;
-      console.log(this.characters)
     } else {
       
     }
   }
 
+  /* Delete My Pokemon */
   delete(id: string): void {
     const check = this.cookies.check('pokemon');
     if(check) {

@@ -8,13 +8,13 @@ import { PokemonService } from '../services/pokemon.service';
 })
 
 export class HomeComponent implements OnInit {
+  isLoading: boolean = true;
+  
   page: number = 1;
   limit: number = 12;
   offset: number = 0;
   totalCharacter: number = 0; 
   characters: any[] = [];
-
-  isLoading: boolean = true;
 
   constructor(private pokemonService: PokemonService) {}
 
@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
     this.getList();
   }
 
+  /* Get Pokemon List */
   getList(): void{
     this.isLoading = true;
     this.characters = [];
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
     this.isLoading = false;
   }
 
+  /* Get Pokemon Detail */
   getDetail(character: any): void{
     this.pokemonService.getPokemonDetailByUrl(character.url, 
       (data) => {
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  /* Pagination */
   renderPage(event: number) {
     this.page = event;
     this.offset = (event - 1) * 12;

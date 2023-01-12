@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { BaseService } from './base.service';
 
 @Injectable({
@@ -10,7 +8,7 @@ import { BaseService } from './base.service';
 export class PokemonService extends BaseService {
   private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon';  // URL to web api
 
-  // Get Pokemon List
+  /* Get Pokemon List */
   getPokemonList(limit: any, offset: any, onSuccess: (data: any) => void): any {
     this.get(this.pokemonUrl +  `?limit=${limit}&offset=${offset}`)
         .subscribe(
@@ -20,8 +18,8 @@ export class PokemonService extends BaseService {
         )
     }
 
-  // Get Pokemon Detail by Url
-  getPokemonDetailByUrl(url: any, onSuccess: (data: any) => void): any {
+  /* Get Pokemon Detail by Url */
+  getPokemonDetailByUrl(url: string, onSuccess: (data: any) => void): any {
     this.get(url)
         .subscribe(
           (resp: any) => {
@@ -30,7 +28,7 @@ export class PokemonService extends BaseService {
         )
   }
 
-  // Get Pokemon Detail by Name
+  /* Get Pokemon Detail by Name */
   getPokemonDetailByName(name: string, onSuccess: (data: any) => void): any {
     this.get(this.pokemonUrl +  `/${name}/`)
         .subscribe(
