@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { PokemonService } from '../services/pokemon.service';
-import { CookieService } from 'ngx-cookie-service';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
@@ -29,8 +28,7 @@ export class DetailComponent implements OnInit {
   constructor(
     private pokemonService: PokemonService,
     private route: ActivatedRoute,
-    private location: Location,
-    private cookies: CookieService) {}
+    private location: Location) {}
 
     ngOnInit() {
       this.isLoading = true;
@@ -62,20 +60,20 @@ export class DetailComponent implements OnInit {
         image: this.character.sprites.other.dream_world.front_default ? this.character.sprites.other.dream_world.front_default : this.character.sprites.other.home.front_default
       }
       
-      const check = this.cookies.check('pokemon');
+      const check = localStorage.getItem('pokemon');
       if(check) {
-        const myPokemon = JSON.parse(this.cookies.get('pokemon'));
+        const myPokemon = JSON.parse(check);
         if(myPokemon.some((item: { id: any; }) => item.id === data.id)){
           console.log('data exist')
         } else {
           myPokemon.push(data);
-          this.cookies.set('pokemon', JSON.stringify(myPokemon));
+          localStorage.setItem('pokemon', JSON.stringify(myPokemon));
         }
       } else {
         const list = [];
         list.push(data);
 
-        this.cookies.set('pokemon', JSON.stringify(list));
+        localStorage.setItem('pokemon', JSON.stringify(list));
       }
 
       this.header.loadTotalPokemon();

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class HeaderComponent implements OnInit {
   totalPokemon: number = 0;
 
-  constructor(private cookies: CookieService) {}
+  constructor() {}
 
   ngOnInit() {
     this.loadTotalPokemon();
@@ -18,9 +17,9 @@ export class HeaderComponent implements OnInit {
 
   /* Get Total My Pokemon */
   loadTotalPokemon(): void {
-    const check = this.cookies.check('pokemon');
+    const check = localStorage.getItem('pokemon');
     if(check) {
-      const myPokemon = JSON.parse(this.cookies.get('pokemon'));
+      const myPokemon = JSON.parse(check);
       this.totalPokemon = myPokemon.length;
     } else {
       this.totalPokemon = 0;
